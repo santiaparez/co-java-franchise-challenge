@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: franchises-api
+
+server:
+  port: 8080
+
+app:
+  dynamodb:
+    table-name: franchises
+    region: us-east-1
+    # endpoint-override: http://localhost:4566
+

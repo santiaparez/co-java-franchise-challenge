@@ -1,0 +1,23 @@
+version: "3.9"
+services:
+  localstack:
+    image: localstack/localstack:3
+    environment:
+      - SERVICES=dynamodb
+      - AWS_DEFAULT_REGION=us-east-1
+    ports:
+      - "4566:4566"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+
+  app:
+    build: .
+    depends_on:
+      - localstack
+    environment:
+      AWS_REGION: us-east-1
+      AWS_ACCESS_KEY_ID: test
+      AWS_SECRET_ACCESS_KEY: test
+      APP_DYNAMODB_ENDPOINT_OVERRIDE: http://localstack:4566
+    ports:
+      - "8080:8080"
