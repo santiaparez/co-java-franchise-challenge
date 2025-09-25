@@ -6,6 +6,7 @@ import com.example.franchises.domain.model.Branch;
 import com.example.franchises.domain.model.Franchise;
 import com.example.franchises.infrastructure.repository.SpringDataFranchiseRepository;
 import reactor.core.publisher.Mono;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,5 +22,9 @@ public class AddBranchUseCase {
         return repo.save(updated).thenReturn(newBranch);
       });
   }
-  private static List<Branch> concat(List<Branch> list, Branch b) { return new java.util.ArrayList<>(list) {{ add(b); }}; }
+  private static List<Branch> concat(List<Branch> list, Branch branch) {
+    List<Branch> updatedBranches = new ArrayList<>(list);
+    updatedBranches.add(branch);
+    return List.copyOf(updatedBranches);
+  }
 }

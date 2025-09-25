@@ -22,10 +22,14 @@ public class AddProductUseCase {
         return repo.save(updated).thenReturn(newProduct);
       });
   }
-  private static java.util.List<Product> concat(java.util.List<Product> list, Product p){ return new java.util.ArrayList<>(list) {{ add(p); }}; }
+  private static java.util.List<Product> concat(java.util.List<Product> list, Product product){
+    java.util.List<Product> updatedProducts = new java.util.ArrayList<>(list);
+    updatedProducts.add(product);
+    return java.util.List.copyOf(updatedProducts);
+  }
   private static java.util.List<Branch> replaceBranch(java.util.List<Branch> list, Branch updated){
     java.util.List<Branch> res = new java.util.ArrayList<>(list);
     for (int i=0;i<res.size();i++) if (res.get(i).id().equals(updated.id())) { res.set(i, updated); break; }
-    return res;
+    return java.util.List.copyOf(res);
   }
 }
