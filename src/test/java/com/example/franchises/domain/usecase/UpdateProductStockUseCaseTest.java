@@ -40,7 +40,7 @@ class UpdateProductStockUseCaseTest {
 
     ArgumentCaptor<Franchise> captor = ArgumentCaptor.forClass(Franchise.class);
     Mockito.verify(repo).save(captor.capture());
-    Product saved = captor.getValue().branches().getFirst().products().getFirst();
+    Product saved = captor.getValue().branches().get(0).products().get(0);
     assertEquals(9, saved.stock());
   }
 

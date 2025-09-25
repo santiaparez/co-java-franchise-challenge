@@ -40,7 +40,7 @@ class AddProductUseCaseTest {
 
     ArgumentCaptor<Franchise> captor = ArgumentCaptor.forClass(Franchise.class);
     Mockito.verify(repo).save(captor.capture());
-    List<Product> products = captor.getValue().branches().getFirst().products();
+    List<Product> products = captor.getValue().branches().get(0).products();
     assertEquals(2, products.size());
     assertTrue(products.stream().anyMatch(p -> p.name().equals("Juice") && p.stock() == 3));
   }

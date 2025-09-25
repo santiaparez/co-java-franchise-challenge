@@ -1,10 +1,10 @@
 # Franchises API (Reactive, Clean Architecture) — **Java**
 
-**Stack:** Spring Boot 3 + WebFlux (Java), Reactive MongoDB, Functional Routing (RouterFunctions/Handlers), springdoc-openapi, Java 21, Docker.
+**Stack:** Spring Boot 3 + WebFlux (Java), Functional Routing (RouterFunctions/Handlers), springdoc-openapi, Java 17, Docker.
 
 ## Run locally
 ```bash
-# 1) Start MongoDB and the app (Docker)
+# 1) Start dynamodb and the app (Docker)
 docker compose up --build
 # Or run only Mongo and start app from IDE
 # docker compose up mongo

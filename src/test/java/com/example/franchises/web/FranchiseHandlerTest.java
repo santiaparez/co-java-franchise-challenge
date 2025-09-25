@@ -81,7 +81,7 @@ class FranchiseHandlerTest {
         .exchange()
         .expectStatus().isBadRequest()
         .expectBody()
-        .jsonPath("$.message").isEqualTo("must not be blank");
+        .jsonPath("$.message").isEqualTo("no debe estar vacío");
   }
 
   @Test

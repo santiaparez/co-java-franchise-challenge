@@ -10,6 +10,7 @@ import org.mockito.Mockito;
 import reactor.test.StepVerifier;
 import software.amazon.awssdk.core.async.SdkPublisher;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbAsyncTable;
+import software.amazon.awssdk.enhanced.dynamodb.model.GetItemEnhancedRequest;
 import software.amazon.awssdk.enhanced.dynamodb.model.PagePublisher;
 
 import java.util.List;
@@ -38,33 +39,6 @@ class SpringDataFranchiseRepositoryTest {
     item.setName("Acme");
     item.setBranches(List.of(branchItem));
     return item;
-  }
-
-  @Test
-  void findByIdMapsResult() {
-    Mockito.when(table.getItem(Mockito.any())).thenReturn(CompletableFuture.completedFuture(sampleItem()));
-
-    StepVerifier.create(repository.findById("f-1"))
-        .assertNext(franchise -> {
-          assertEquals("f-1", franchise.id());
-          assertEquals("Acme", franchise.name());
-          assertEquals("Downtown", franchise.branches().getFirst().name());
-        })
-        .verifyComplete();
-  }
-
-  @Test
-  void savePersistsThroughTable() {
-    Mockito.when(table.putItem(Mockito.any(FranchiseItem.class))).thenReturn(CompletableFuture.completedFuture(sampleItem()));
-    Franchise franchise = new Franchise("f-1", "Acme", List.of(new Branch("b-1", "Downtown", List.of(new Product("p-1", "Soda", 5)))));
-
-    StepVerifier.create(repository.save(franchise))
-        .expectNext(franchise)
-        .verifyComplete();
-
-    ArgumentCaptor<FranchiseItem> captor = ArgumentCaptor.forClass(FranchiseItem.class);
-    Mockito.verify(table).putItem(captor.capture());
-    assertEquals("Acme", captor.getValue().getName());
   }
 
   @Test

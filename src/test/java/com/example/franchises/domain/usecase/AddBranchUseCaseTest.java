@@ -33,7 +33,7 @@ class AddBranchUseCaseTest {
     ArgumentCaptor<Franchise> captor = ArgumentCaptor.forClass(Franchise.class);
     Mockito.verify(repo).save(captor.capture());
     assertEquals(1, captor.getValue().branches().size());
-    assertEquals("Downtown", captor.getValue().branches().getFirst().name());
+    assertEquals("Downtown", captor.getValue().branches().get(0).name());
   }
 
   @Test

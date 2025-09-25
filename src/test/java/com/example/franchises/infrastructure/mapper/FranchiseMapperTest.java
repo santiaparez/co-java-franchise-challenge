@@ -34,9 +34,9 @@ class FranchiseMapperTest {
     assertEquals("f-1", domain.id());
     assertEquals("Acme", domain.name());
     assertEquals(1, domain.branches().size());
-    Branch branch = domain.branches().getFirst();
+    Branch branch = domain.branches().get(0);
     assertEquals("Downtown", branch.name());
-    Product product = branch.products().getFirst();
+    Product product = branch.products().get(0);
     assertEquals("Soda", product.name());
     assertEquals(5, product.stock());
   }
@@ -52,9 +52,9 @@ class FranchiseMapperTest {
     assertEquals("f-1", item.getId());
     assertEquals("Acme", item.getName());
     assertEquals(1, item.getBranches().size());
-    FranchiseItem.BranchItem branch = item.getBranches().getFirst();
+    FranchiseItem.BranchItem branch = item.getBranches().get(0);
     assertEquals("Downtown", branch.getName());
-    FranchiseItem.ProductItem product = branch.getProducts().getFirst();
+    FranchiseItem.ProductItem product = branch.getProducts().get(0);
     assertEquals("Soda", product.getName());
     assertEquals(5, product.getStock());
   }

@@ -10,7 +10,6 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 
 @Configuration
 public class RouterConfig {
-  //http://54.235.42.244:8080/api/v1/
   @Bean
   public RouterFunction<ServerResponse> routes(FranchiseHandler h) {
     return RouterFunctions.nest(RequestPredicates.path("/api/v1"),

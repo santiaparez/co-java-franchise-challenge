@@ -40,7 +40,7 @@ class UpdateBranchNameUseCaseTest {
 
     ArgumentCaptor<Franchise> captor = ArgumentCaptor.forClass(Franchise.class);
     Mockito.verify(repo).save(captor.capture());
-    assertEquals("Uptown", captor.getValue().branches().getFirst().name());
+    assertEquals("Uptown", captor.getValue().branches().get(0).name());
   }
 
   @Test

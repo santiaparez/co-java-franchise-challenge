@@ -36,7 +36,7 @@ class RemoveProductUseCaseTest {
 
     ArgumentCaptor<Franchise> captor = ArgumentCaptor.forClass(Franchise.class);
     Mockito.verify(repo).save(captor.capture());
-    assertTrue(captor.getValue().branches().getFirst().products().isEmpty());
+    assertTrue(captor.getValue().branches().get(0).products().isEmpty());
   }
 
   @Test
