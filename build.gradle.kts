@@ -2,6 +2,8 @@ plugins {
   id("org.springframework.boot") version "3.3.4"
   id("io.spring.dependency-management") version "1.1.6"
   java
+  jacoco
+  id("org.sonarqube")
 }
 
 group = "com.example"
@@ -28,3 +30,29 @@ dependencies {
 }
 
 tasks.test { useJUnitPlatform() }
+
+jacoco {
+  toolVersion = "0.8.12"
+}
+
+tasks.jacocoTestReport {
+  dependsOn(tasks.test)
+  reports {
+    xml.required.set(true)
+    csv.required.set(false)
+    html.outputLocation.set(layout.buildDirectory.dir("reports/jacoco/html"))
+  }
+}
+
+tasks.check {
+  dependsOn(tasks.jacocoTestReport)
+}
+
+sonar {
+  properties {
+    property(
+      "sonar.coverage.jacoco.xmlReportPaths",
+      layout.buildDirectory.file("reports/jacoco/test/jacocoTestReport.xml").get().asFile.absolutePath
+    )
+  }
+}
